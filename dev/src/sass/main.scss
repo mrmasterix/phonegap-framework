@@ -25,6 +25,9 @@
 
 /* Framework Common Libraries */
 @import 'blocks/g-blocks';
+@import 'plugins/index';
+@import 'plugins/junior';
+@import 'plugins/bxslider';
 
 /* Project only code */
 @import 'blocks/common';
@@ -39,6 +42,8 @@
 @import 'blocks/l-siteCopyright';
 @import 'blocks/b-developerCopyright';
 
+@import 'blocks/home';
+@import 'blocks/chat';
 
 /**
 * Responsive & Print styles
@@ -48,3 +53,4 @@
 @import 'responsive/device_mobile';
 @import 'responsive/media_queries';
 @import 'print';
+

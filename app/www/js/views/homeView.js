@@ -15,7 +15,19 @@ define([
     
     render: function(){
       var $this = this;
-      $this.$el.html($this.template(testdb[0]));
+      var viewData = {
+        settings: {
+          header: {
+            visible: true,
+            title: 'Main'
+          },
+          footer: {
+            visible: true
+          }
+        },
+        data: testdb[0]
+      };
+      $this.$el.html($this.template(viewData));
       $this.afterRender();
       return $this;
     },
@@ -24,7 +36,27 @@ define([
       $('body').removeClass('g-loading');
     },
 
-    events: {},
+    events: {
+      'click [data-event]' : 'socketSend',
+      'click [data-node-event]' : 'serverSend',
+      'click .js-second' : 'second'
+    },
+    
+    socketSend: app.send,
+    
+    serverSend: function(){
+      var model = Backbone.Model.extend({
+        url: app.nodeServer+'/test'
+      });
+      model = new model();
+      app.sync('read', model, false, function(res){
+        console.log(res.data);
+      });
+    },
+    
+    second: function(){
+      app.changePage('chat', true, 'left');
+    }
     
   });
   
